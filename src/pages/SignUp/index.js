@@ -1,17 +1,20 @@
 import React, {useContext, useState} from "react";
-import { Platform } from "react-native";
+import { Platform, ActivityIndicator } from "react-native";
 
 import { Background, Container, AreaInput, Input, SubmitButton, SubmitText } from "../SignIn/styles";
 import { AuthContext } from "../../contexts/auth";
 
 export default function SignUp(){
 
-  const { SignUp } = useContext(AuthContext);
+  const { SignUp, loadingAuth } = useContext(AuthContext);
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   function handleSignUp(){
+    if(nome === '' || email === '' || password === '') return;
+
+
     SignUp(email, password, nome);
   }
 
@@ -47,7 +50,13 @@ export default function SignUp(){
         </AreaInput>
 
         <SubmitButton onPress={handleSignUp}>
-          <SubmitText>Cadastrar</SubmitText>
+          {
+            loadingAuth ? (
+              <ActivityIndicator size={20} color="#FFF"/>
+            ) : (
+              <SubmitText>Cadastrar</SubmitText>
+            )
+          }
         </SubmitButton>
 
       </Container>
