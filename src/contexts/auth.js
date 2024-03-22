@@ -31,8 +31,12 @@ function AuthProvider({ children }){
     }
   }
 
+  async function signIn(email, password){
+    console.log("Email teste: ", email)
+  }
+
   return(
-    <AuthContext.Provider value={{signed: !!user, user, SignUp, loadingAuth}}>
+    <AuthContext.Provider value={{signed: !!user, user, SignUp, signIn, loadingAuth}}>
       {children}
     </AuthContext.Provider>
   )
