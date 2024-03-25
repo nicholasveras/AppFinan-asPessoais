@@ -32,7 +32,37 @@ function AuthProvider({ children }){
   }
 
   async function signIn(email, password){
-    console.log("Email teste: ", email)
+    setLoadingAuth(true);
+
+    try{
+      const response = await api.post('/login', {
+        email: email,
+        password: password,
+      })
+
+      const { id, name, token } = response.data;
+
+      const data = {
+        id,
+        name,
+        token,
+        email
+      };
+
+      api.defaults.headers['Authorization'] = `Bearer ${token}`;
+
+      setUser({
+        id,
+        name,
+        email,
+      });
+
+      setLoadingAuth(false);
+
+    }catch(error){
+      console.log("ERRO AO LOGAR ", error);
+      setLoadingAuth(false);
+    }
   }
 
   return(
