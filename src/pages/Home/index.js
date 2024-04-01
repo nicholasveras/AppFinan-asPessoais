@@ -3,18 +3,13 @@ import { View, Text, Button } from 'react-native';
 
 import { AuthContext } from "../../contexts/auth";
 
-export default function Home(){
-  const {signOut} = useContext(AuthContext);
+import { Background } from "./styles";
 
+export default function Home(){
 
   return(
-    <View>
-      <Text>TELA HOME</Text>
-      <Text>Nome: {user.name}</Text>
-      <Button
-      title="Sair da conta"
-      onPress={() => signOut()}
-      />
-    </View>
+    <Background>
+
+    </Background>
   )
 }
